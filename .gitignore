@@ -10,3 +10,9 @@ wheels/
 .venv
 
 Tests/
+
+app.db
+
+.env
+
+

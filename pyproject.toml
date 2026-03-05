@@ -18,6 +18,11 @@ dependencies = [
 pythonpath = ["."] 
 testpaths = ["Tests"]
 
+[tool.uv.workspace]
+members = [
+    "app_front",
+]
+
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
