@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, Float
 
-from .database import Base
+from Database.database import Base
+
 
 class Data(Base):
     __tablename__ = "data"

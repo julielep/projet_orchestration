@@ -1,7 +1,13 @@
 import streamlit as st
 import requests
+from dotenv import load_dotenv
+import os
 
-API_URL = "http://localhost:8000"
+load_dotenv()
+
+API_URL = os.getenv(
+    "STREAMLIT_API_URL", "http://api_backend:8000"
+)  # Avant on était sur localhost mais maintenant api_backend qui est le nom du conteneur pour se connecter à la base de données
 
 st.set_page_config(page_title="Mini Calculatrice API", page_icon="🧮")
 

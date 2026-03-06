@@ -1,10 +1,6 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="Mini Calculatrice",
-    page_icon="🧮",
-    layout="centered"
-)
+st.set_page_config(page_title="Mini Calculatrice", page_icon="🧮", layout="centered")
 
 st.title("🧮 Application de Calcul")
 
@@ -16,4 +12,4 @@ Utilisez le menu à gauche pour :
 - 📖 Voir les résultats
 """)
 
-st.info("API FastAPI requise sur http://localhost:8000")
+st.info("API FastAPI requise sur http://api_backend:8000")

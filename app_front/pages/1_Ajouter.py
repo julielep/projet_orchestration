@@ -1,7 +1,11 @@
 import streamlit as st
 import requests
+from dotenv import load_dotenv
+import os
 
-API_URL = "http://localhost:8000"
+load_dotenv()
+
+API_URL = os.getenv("STREAMLIT_API_URL", "http://api_backend:8000")
 
 st.set_page_config(page_title="Mini Calculatrice API", page_icon="🧮")
 
@@ -19,13 +23,7 @@ b = st.number_input("Entrez la valeur de b", value=0.0)
 
 if st.button("Calculer et sauvegarder"):
     try:
-        response = requests.post(
-            f"{API_URL}/data/",
-            json={
-                "a": a,
-                "b": b
-            }
-        )
+        response = requests.post(f"{API_URL}/data/", json={"a": a, "b": b})
         response.raise_for_status()
 
         result_data = response.json()
