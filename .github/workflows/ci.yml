@@ -31,9 +31,7 @@ jobs:
       - name: Run Tests with Pytest
         # On définit des variables d'env vides pour que dotenv ne bloque pas
         env:
+          TESTING: True
           DATABASE_URL: "sqlite:///./test.db" 
+          PYTHONPATH: .
         run: uv run pytest --cov=app_api --cov=app_front .  
-      - name: Run Tests with Pytest
-        # 1. On utilise Tests/ (avec majuscule)
-        # 2. On remplace --cov=src par tes vrais dossiers pour avoir un rapport de couverture
-        run: uv run pytest --cov=app_api --cov=app_front Tests/
