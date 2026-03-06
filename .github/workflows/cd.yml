@@ -2,7 +2,7 @@ name: Continuous Deployment
 
 on:
   push:
-    branches: [ "main" ] # Déclenchement lors d'un push sur main
+    branches: [ "master" ] # Déclenchement lors d'un push sur main
   workflow_run:
     workflows: ["Continuous Integration"] # Se lance seulement si le linting passe
     types: [completed]
