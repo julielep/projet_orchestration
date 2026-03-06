@@ -27,6 +27,17 @@ jobs:
           uv run ruff check .
           uv run ruff format --check .
 
+          
+      - name: Install dependencies
+        run: |
+          uv pip install -e .  # Installe ton projet
+          uv pip install pytest pytest-cov httpx python-dotenv # Installe les outils de test
+
+      - name: Run Tests with Pytest
+        # On définit des variables d'env vides pour que dotenv ne bloque pas
+        env:
+          DATABASE_URL: "sqlite:///./test.db" 
+        run: uv run pytest --cov=app_api --cov=app_front .  
       - name: Run Tests with Pytest
         # 1. On utilise Tests/ (avec majuscule)
         # 2. On remplace --cov=src par tes vrais dossiers pour avoir un rapport de couverture
