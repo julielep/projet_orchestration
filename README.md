@@ -73,8 +73,9 @@ docker compose ps
 -> 3 services s'activent : (à modifier)
 ```
 NAME              IMAGE                           COMMAND                  SERVICE    CREATED         STATUS         PORTS
-postgres_db       postgres:15-alpine              "docker-entrypoint.s…"   database   5 hours ago     Up 5 hours     0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp       
-streamlit_front   projet_orchestration-frontend   "streamlit run main.…"   frontend   7 seconds ago   Up 2 seconds   0.0.0.0:8501->8501/tcp, [::]:8501->8501/tcp       
+api_backend       projet_orchestration-api        "python -m uvicorn a…"   api        5 seconds ago   Up 4 seconds   0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp       
+postgres_db       postgres:15-alpine              "docker-entrypoint.s…"   database   3 minutes ago   Up 3 minutes   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp       
+streamlit_front   projet_orchestration-frontend   "streamlit run main.…"   frontend   5 seconds ago   Up 3 seconds   0.0.0.0:8501->8501/tcp, [::]:8501->8501/tcp      
 ```
 
 
