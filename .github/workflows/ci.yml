@@ -57,7 +57,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: |
-          uv add install sphinx sphinx-rtd-theme
+          uv add sphinx sphinx-rtd-theme
       - name: Build HTML Documentation
         run: |
           # Remplace 'docs' par le nom de ton dossier de doc
