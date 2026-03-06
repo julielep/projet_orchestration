@@ -1,5 +1,5 @@
-from app_api.api import app
-from app_api.Database.database import Base, get_db
+from app_api.api import app, get_db
+from app_api.Database.database import Base
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
