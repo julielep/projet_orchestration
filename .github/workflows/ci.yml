@@ -27,11 +27,6 @@ jobs:
           uv run ruff check .
           uv run ruff format --check .
 
-          
-      - name: Install dependencies
-        run: |
-          uv pip install -e .  # Installe ton projet
-          uv pip install pytest pytest-cov httpx python-dotenv # Installe les outils de test
 
       - name: Run Tests with Pytest
         # On définit des variables d'env vides pour que dotenv ne bloque pas
