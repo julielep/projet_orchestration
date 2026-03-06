@@ -53,7 +53,5 @@ jobs:
         uses: astral-sh/setup-uv@v5 # OBLIGATOIRE ici aussi
       - name: Build HTML Documentation
         run: |
-          # On installe les thèmes nécessaires
-          uv pip install sphinx sphinx-rtd-theme furo
           # Génération (vérifie bien que ton dossier s'appelle docs/source ou docs/)
           uv run sphinx-build -b html docs/source/ build/html
