@@ -1,6 +1,7 @@
-from sqlalchemy.orm import Session
 from Database import models
-import maths as maths
+from sqlalchemy.orm import Session
+
+import app_api.maths as maths
 
 
 def create_data(db: Session, data):

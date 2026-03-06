@@ -7,7 +7,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 # 2. On indique à uv d'utiliser le Python système (pas de venv)
 ENV UV_SYSTEM_PYTHON=1
 
-WORKDIR /app_api
+WORKDIR /app
 
 # 3. Copie des fichiers de dépendances
 # uv privilégiera le uv.lock s'il existe pour garantir l'immutabilité
@@ -26,4 +26,4 @@ EXPOSE 8080
 
 # 7. Lancement de l'API
 
-CMD ["python", "-m", "uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
