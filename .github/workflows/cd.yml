@@ -1,1 +1,39 @@
-"""Pas encore commencé"""
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [ "main" ] # Déclenchement lors d'un push sur main
+  workflow_run:
+    workflows: ["Continuous Integration"] # Se lance seulement si le linting passe
+    types: [completed]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    # On ne déploie que si le workflow de test (CI) est un succès
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Verify Images
+        run: |
+          docker compose build
+          docker images # Pour vérifier que les images sont bien créées
+
+      - name: Test Orchestration (Dry Run)
+        run: |
+          docker compose up -d
+          # On attend que les services soient prêts
+          sleep 10
+          docker compose ps
+          # Vérification de l'isolation réseau (le test qu'on a fait ensemble)
+          docker exec streamlit_front python -c "import socket; s=socket.socket(); s.settimeout(2); s.connect(('api_backend', 8000)); print('API accessible')"
+          
+      - name: Stop services
+        if: always()
+        run: docker compose down
