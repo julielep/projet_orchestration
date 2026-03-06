@@ -9,13 +9,7 @@ client = TestClient(app)
 
 
 def test_create_data():
-    response = client.post(
-        "/data/",
-        json={
-            "a": 2,
-            "b": 3
-        }
-    )
+    response = client.post("/data/", json={"a": 2, "b": 3})
 
     assert response.status_code == 200
     data = response.json()
