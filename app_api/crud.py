@@ -1,7 +1,7 @@
-from Database import models
 from sqlalchemy.orm import Session
 
 import app_api.maths as maths
+from app_api.Database import models
 
 
 def create_data(db: Session, data):
