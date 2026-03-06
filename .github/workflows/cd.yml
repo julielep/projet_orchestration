@@ -25,7 +25,14 @@ jobs:
           docker compose build
           docker images # Pour vérifier que les images sont bien créées
 
-      - name: Test Orchestration (Dry Run)
+      - name: Run docker compose up
+        env:
+          # On définit des valeurs par défaut pour le test de déploiement
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: mydb
+          DATABASE_URL: postgresql://user:password@database:5432/mydb
+          API_URL: http://api_backend:8000
         run: |
           docker compose up -d
           # On attend que les services soient prêts
