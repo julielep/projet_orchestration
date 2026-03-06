@@ -1,4 +1,5 @@
-name: CI Quality Check
+name: CI Quality & Security
+
 on:
   push:
     branches: [ main, dev ]
@@ -6,7 +7,21 @@ on:
     branches: [ main ]
 
 jobs:
+  # PREMIER JOB : Sécurité (Gitleaks)
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Gitleaks a besoin de tout l'historique
+      - name: Check for secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # DEUXIÈME JOB : Qualité (Lint + Tests)
   test-and-lint:
+    needs: security-scan # On ne lance les tests que si le scan de sécurité est OK
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,18 +35,18 @@ jobs:
       - name: Set up Python
         run: uv python install 3.12
 
+      - name: Install dependencies
+        run: |
+          uv pip install fastapi uvicorn python-dotenv sqlalchemy psycopg2-binary httpx pytest pytest-cov
+
       - name: Lint with Ruff
-        # Si Ruff échoue ici, c'est que le formatage local (ton settings.json) 
-        # n'a pas été appliqué avant le push.
         run: |
           uv run ruff check .
           uv run ruff format --check .
 
-
       - name: Run Tests with Pytest
-        # On définit des variables d'env vides pour que dotenv ne bloque pas
         env:
-          TESTING: True
+          TESTING: "true"
           DATABASE_URL: "sqlite:///./test.db" 
           PYTHONPATH: .
-        run: uv run pytest --cov=app_api --cov=app_front .  
+        run: uv run pytest --cov=app_api --cov=app_front .
