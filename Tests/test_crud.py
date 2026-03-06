@@ -13,7 +13,6 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 
 # 2. On crée les tables dans la base de test
 Base.metadata.create_all(bind=engine)
-CLE_API = "xoxb-123456789012-123456789012-ABCDE12345"
 
 # 3. On remplace la dépendance get_db par notre base de test
 def override_get_db():
