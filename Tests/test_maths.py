@@ -5,6 +5,7 @@ Test les fonctions mathématiques.
 import app_api.maths as maths
 import pytest
 
+
 @pytest.mark.parametrize(
     "a, b, expected",
     [
@@ -16,6 +17,7 @@ import pytest
 )
 def test_add(a, b, expected):
     assert maths.add(a, b) == pytest.approx(expected)  # approx pour float
+
 
 @pytest.mark.parametrize(
     "a, b, expected",

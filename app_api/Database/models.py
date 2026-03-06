@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, Float
+from sqlalchemy import Column, Float, Integer
 
-from Database.database import Base
+from app_api.Database.database import Base
 
 
 class Data(Base):
