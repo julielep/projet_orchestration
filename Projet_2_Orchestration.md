@@ -63,10 +63,10 @@ uv run pytest app_api/tests
 
 ### Phase C : Orchestration Docker Compose (test en local)
 
-* [ ] **Réseaux (Networks)** : Créez deux réseaux :
+* [x] **Réseaux (Networks)** : Créez deux réseaux :
 * `front-api` : Pour la communication Streamlit <-> FastAPI.
 * `api-db` : Pour la communication FastAPI <-> PostgreSQL (**la BDD doit être invisible pour le Front**).
-* [ ] **Volumes** : Configurez un volume pour que les données de PostgreSQL ne disparaissent pas au redémarrage des conteneurs. Testez d'éteindre et de rallumer les services et regarder sur streamlit si les données sont toujours là.
+* [x] **Volumes** : Configurez un volume pour que les données de PostgreSQL ne disparaissent pas au redémarrage des conteneurs. Testez d'éteindre et de rallumer les services et regarder sur streamlit si les données sont toujours là.
 
 ### Schéma approximatif de l'architecture (Orchestration Docker)
 

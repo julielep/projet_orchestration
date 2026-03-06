@@ -16,4 +16,4 @@ Utilisez le menu à gauche pour :
 - 📖 Voir les résultats
 """)
 
-st.info("API FastAPI requise sur http://localhost:8000")
+st.info("API FastAPI requise sur http://api_backend:8000")

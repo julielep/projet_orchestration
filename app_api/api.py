@@ -1,10 +1,13 @@
+"""app_api/api.py"""
+
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from dotenv import load_dotenv
-from . import schemas as sc
-import app_api.crud as crud
 
-from app_api.Database.database import engine, SessionLocal, Base
+import crud as crud
+import schemas as sc
+
+from Database.database import engine, SessionLocal, Base
 
 load_dotenv()
 Base.metadata.create_all(bind=engine)
