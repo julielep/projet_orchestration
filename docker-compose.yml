@@ -20,7 +20,7 @@ services:
       - front-api
       - api-db
     volumes:
-      - ./app_api:/app
+      - ./app_api:/app/app_api
     environment:
       DATABASE_URL: ${DATABASE_URL}
     ports:

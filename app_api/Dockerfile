@@ -26,4 +26,4 @@ EXPOSE 8080
 
 # 7. Lancement de l'API
 
-CMD ["python", "-m", "uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "uvicorn", "app_api.api:app", "--host", "0.0.0.0", "--port", "8000"]
