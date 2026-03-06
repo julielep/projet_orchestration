@@ -23,13 +23,7 @@ b = st.number_input("Entrez la valeur de b", value=0.0)
 
 if st.button("Calculer et sauvegarder"):
     try:
-        response = requests.post(
-            f"{API_URL}/data/",
-            json={
-                "a": a,
-                "b": b
-            }
-        )
+        response = requests.post(f"{API_URL}/data/", json={"a": a, "b": b})
         response.raise_for_status()
 
         result_data = response.json()

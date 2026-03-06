@@ -102,12 +102,14 @@ version = "0.1.0"
 source = { virtual = "app_front" }
 dependencies = [
     { name = "dotenv" },
+    { name = "ruff" },
     { name = "streamlit" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "dotenv", specifier = ">=0.9.9" },
+    { name = "ruff", specifier = ">=0.15.5" },
     { name = "streamlit", specifier = ">=1.55.0" },
 ]
 

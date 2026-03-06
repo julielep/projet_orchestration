@@ -6,11 +6,7 @@ import maths as maths
 def create_data(db: Session, data):
     result = maths.add(data.a, data.b)
 
-    db_data = models.Data(
-        a=data.a,
-        b=data.b,
-        result=result
-    )
+    db_data = models.Data(a=data.a, b=data.b, result=result)
 
     db.add(db_data)
     db.commit()
