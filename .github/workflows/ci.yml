@@ -2,63 +2,58 @@ name: CI Quality & Security
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ main, dev, master ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  # PREMIER JOB : Sécurité (Gitleaks)
+  # 1. SÉCURITÉ
   security-scan:
+    name: Security Scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Gitleaks a besoin de tout l'historique
+          fetch-depth: 0
       - name: Check for secrets
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # DEUXIÈME JOB : Qualité (Lint + Tests)
+  # 2. QUALITÉ (LINT + TESTS)
   test-and-lint:
-    needs: security-scan # On ne lance les tests que si le scan de sécurité est OK
+    name: Quality and Tests
+    needs: security-scan
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Install uv
-        uses: astral-sh/setup-uv@v3
-        with:
-          enable-cache: true
-          
+        uses: astral-sh/setup-uv@v5 # Version 5 recommandée
       - name: Set up Python
         run: uv python install 3.12
-
-      # - name: Install dependencies
-      #   run: |
-      #     uv pip install fastapi uvicorn python-dotenv sqlalchemy psycopg2-binary httpx pytest pytest-cov
-
       - name: Lint with Ruff
         run: |
           uv run ruff check .
           uv run ruff format --check .
-
-      - name: Run Tests with Pytest
+      - name: Run Tests
         env:
           TESTING: True
           DATABASE_URL: "sqlite:///./test.db" 
           PYTHONPATH: .
         run: uv run pytest --cov=app_api --cov=app_front .
 
+  # 3. DOCUMENTATION
   documentation-check:
+    name: Documentation Build
+    needs: test-and-lint # On vérifie la doc seulement si les tests passent
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: |
-          uv add sphinx sphinx-rtd-theme
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5 # OBLIGATOIRE ici aussi
       - name: Build HTML Documentation
         run: |
-          # Remplace 'docs' par le nom de ton dossier de doc
-          uv run sphinx-build -b html docs/ docs/_build/html
+          # On installe les thèmes nécessaires
+          uv pip install sphinx sphinx-rtd-theme furo
+          # Génération (vérifie bien que ton dossier s'appelle docs/source ou docs/)
+          uv run sphinx-build -b html docs/source/ build/html
