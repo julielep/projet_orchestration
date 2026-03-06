@@ -1,7 +1,11 @@
 import streamlit as st
 import requests
+from dotenv import load_dotenv
+import os
 
-API_URL = "http://localhost:8000"
+load_dotenv()
+
+API_URL = os.getenv("STREAMLIT_API_URL", "http://localhost:8000")
 
 st.set_page_config(page_title="Mini Calculatrice API", page_icon="🧮")
 

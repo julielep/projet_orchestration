@@ -53,8 +53,8 @@ uv run pytest app_api/tests
 
 ### Phase B : Variables d'Environnement et Hygiène
 
-* [ ] **Extraction** : Sortez les URLs, logins et mots de passe de votre code.
-* [ ] **Gestion des fichiers** :
+* [x] **Extraction** : Sortez les URLs, logins et mots de passe de votre code.
+* [x] **Gestion des fichiers** :
 * `.env` : Contient vos secrets (exclu par `.gitignore`).
 * `.env.example` : Template vide pour expliquer quelles variables sont nécessaires.
 * `.dockerignore` : Empêchez l'envoi de `.env`, `.venv` et `__pycache__` dans vos images.
